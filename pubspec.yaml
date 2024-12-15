@@ -1,0 +1,60 @@
+name: vocabify
+description: "A new Flutter project."
+publish_to: 'none'
+version: 0.1.0
+
+environment:
+  sdk: ^3.5.4
+
+dependencies:
+  flutter:
+    sdk: flutter
+  excel: ^4.0.6
+  shared_preferences: ^2.3.3
+  package_info_plus: ^4.0.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+  flutter_launcher_icons: ^0.13.1
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/idioms.xlsx
+    - assets/antonyms.xlsx
+    - assets/synonyms.xlsx
+    - assets/phrasal_verbs.xlsx
+    - assets/vocabify_1.png
+    - assets/bg.jpeg
+    - assets/v.png
+    - assets/
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/vocabify_1.png"
+  adaptive_icon_background: "#ffffff"
+  adaptive_icon_foreground: "assets/vocabify_1.png"
+  min_sdk_android: 21
+  remove_alpha_ios: true
+
+fonts:
+  - family: Poppins
+    fonts:
+      - asset: assets/fonts/Poppins-Regular.ttf
+      - asset: assets/fonts/Poppins-Medium.ttf
+        weight: 500
+      - asset: assets/fonts/Poppins-SemiBold.ttf
+        weight: 600
+      - asset: assets/fonts/Poppins-Bold.ttf
+        weight: 700
+  - family: Roboto
+    fonts:
+      - asset: assets/fonts/Roboto-Regular.ttf
+      - asset: assets/fonts/Roboto-Medium.ttf
+        weight: 500
+      - asset: assets/fonts/Roboto-Bold.ttf
+        weight: 700
