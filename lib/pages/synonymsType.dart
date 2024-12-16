@@ -94,10 +94,10 @@ class _SynonymsTypeState extends State<SynonymsType> {
 
     // Shuffle wrong answers first
     allWrongAnswers.shuffle(Random());
-    
+
     // Take first 3 wrong answers
     final selectedWrongAnswers = allWrongAnswers.take(3).toList();
-    
+
     // If we don't have enough wrong answers, add placeholder options
     while (selectedWrongAnswers.length < 3) {
       selectedWrongAnswers.add('No option available');
@@ -105,7 +105,7 @@ class _SynonymsTypeState extends State<SynonymsType> {
 
     // Create options list with correct answer and wrong answers
     _options = [currentQuestion['synonym']!, ...selectedWrongAnswers];
-    
+
     // Shuffle multiple times for better randomization
     for (int i = 0; i < 3; i++) {
       _options.shuffle(Random());
@@ -198,7 +198,7 @@ class _SynonymsTypeState extends State<SynonymsType> {
         backgroundColor: const Color(0xFF222831),
         appBar: AppBar(
           title: const Text(
-            'Typing Practice',
+            'Synonyms Type',
             style: TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.w600,
@@ -272,7 +272,7 @@ class _SynonymsTypeState extends State<SynonymsType> {
       backgroundColor: const Color(0xFF222831),
       appBar: AppBar(
         title: const Text(
-          'Typing Practice',
+          'Synonyms Type',
           style: TextStyle(
             fontSize: 24,
             fontWeight: FontWeight.w600,
