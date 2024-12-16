@@ -58,16 +58,22 @@ class _IdiomsPageState extends State<IdiomsPage> {
 
   void _setOptions() {
     final currentQuestion = _questions[_currentQuestionIndex];
-    final wrongAnswers = _questions
+    // Get all meanings except the current one
+    final wrongAnswers = List<String>.from(_questions
         .where((q) => q['meaning'] != currentQuestion['meaning'])
-        .map((q) => q['meaning']!)
-        .toList();
-    wrongAnswers.shuffle();
+        .map((q) => q['meaning']!));
 
+    // Thoroughly shuffle wrong answers
+    wrongAnswers.shuffle(Random());
+
+    // Take 3 wrong answers and add the correct one
     _options = [
-      currentQuestion['meaning']!,
       ...wrongAnswers.take(3),
-    ]..shuffle();
+      currentQuestion['meaning']!,
+    ];
+
+    // Final shuffle of all options
+    _options.shuffle(Random());
   }
 
   void _checkAnswer(String selectedOption) {
@@ -80,21 +86,18 @@ class _IdiomsPageState extends State<IdiomsPage> {
     setState(() {
       _currentQuestionIndex++;
       if (_currentQuestionIndex >= _questions.length) {
-        _currentQuestionIndex = 0; // Reset to first question
-        _questions.shuffle(Random()); // Shuffle again for new round
+        _currentQuestionIndex = 0;
+        _questions.shuffle(Random());
       }
-      _selectedAnswer = null; // Reset selected answer for next question
-      // Set options for the next question
-      _setOptions();
+      _selectedAnswer = null;
+      _setOptions(); // This will now properly randomize options
     });
   }
 
   void _retryQuestion() {
     setState(() {
-      // Reset selected answer without changing the question
       _selectedAnswer = null;
-      // Shuffle options when retrying the same question
-      _options.shuffle(Random());
+      _setOptions(); // This will now properly randomize options for retry
     });
   }
 
@@ -121,7 +124,7 @@ class _IdiomsPageState extends State<IdiomsPage> {
           borderRadius: BorderRadius.vertical(bottom: Radius.circular(17)),
         ),
         flexibleSpace: Container(
-          decoration: BoxDecoration(gradient: _appBarGradient),
+          decoration: const BoxDecoration(gradient: _appBarGradient),
         ),
       ),
       body: SingleChildScrollView(
@@ -271,7 +274,7 @@ class _IdiomsPageState extends State<IdiomsPage> {
             ),
           ),
           flexibleSpace: Container(
-            decoration: BoxDecoration(gradient: _appBarGradient),
+            decoration: const BoxDecoration(gradient: _appBarGradient),
           ),
         ),
         body: Center(
@@ -326,7 +329,7 @@ class _IdiomsPageState extends State<IdiomsPage> {
             ),
           ),
           flexibleSpace: Container(
-            decoration: BoxDecoration(gradient: _appBarGradient),
+            decoration: const BoxDecoration(gradient: _appBarGradient),
           ),
         ),
         body: Center(
@@ -400,7 +403,7 @@ class _IdiomsPageState extends State<IdiomsPage> {
           ),
         ),
         flexibleSpace: Container(
-          decoration: BoxDecoration(gradient: _appBarGradient),
+          decoration: const BoxDecoration(gradient: _appBarGradient),
         ),
         actions: [
           Container(

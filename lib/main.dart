@@ -68,10 +68,10 @@ class _VocabularyAppState extends State<VocabularyApp> {
       routes: {
         '/': (context) =>
             HomePage(onThemeChanged: _toggleTheme, isDarkMode: _isDarkMode),
-        '/idioms': (context) => IdiomsPage(),
-        '/phrasalVerbs': (context) => PhrasalVerbsPage(),
-        '/synonyms': (context) => SynonymsPage(),
-        '/antonyms': (context) => AntonymsPage(),
+        '/idioms': (context) => const IdiomsPage(),
+        '/phrasalVerbs': (context) => const PhrasalVerbsPage(),
+        '/synonyms': (context) => const SynonymsPage(),
+        '/antonyms': (context) => const AntonymsPage(),
         '/settings': (context) =>
             SettingsPage(onThemeChanged: _toggleTheme, isDarkMode: _isDarkMode),
         '/synonymsType': (context) => const SynonymsType(),
@@ -451,16 +451,10 @@ class _HomePageState extends State<HomePage>
 
 class BoxdropFilter extends BoxDecoration {
   const BoxdropFilter({
-    Color? color,
-    BorderRadiusGeometry? borderRadius,
-    Border? border,
-    List<BoxShadow>? boxShadow,
-    Gradient? gradient,
-  }) : super(
-          color: color,
-          borderRadius: borderRadius,
-          border: border,
-          boxShadow: boxShadow,
-          gradient: gradient,
-        );
+    super.color,
+    super.borderRadius,
+    Border? super.border,
+    super.boxShadow,
+    super.gradient,
+  });
 }

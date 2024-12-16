@@ -86,22 +86,30 @@ class _SynonymsTypeState extends State<SynonymsType> {
     }
 
     final currentQuestion = _questions[_currentQuestionIndex];
-    final wrongAnswers = _questions
+    // Get all possible wrong answers by excluding current synonym
+    final allWrongAnswers = _questions
         .where((q) => q['synonym'] != currentQuestion['synonym'])
         .map((q) => q['synonym']!)
         .toList();
 
-    if (wrongAnswers.length < 3) {
-      wrongAnswers.addAll(
-        List.filled(3 - wrongAnswers.length, 'No option available'),
-      );
+    // Shuffle wrong answers first
+    allWrongAnswers.shuffle(Random());
+    
+    // Take first 3 wrong answers
+    final selectedWrongAnswers = allWrongAnswers.take(3).toList();
+    
+    // If we don't have enough wrong answers, add placeholder options
+    while (selectedWrongAnswers.length < 3) {
+      selectedWrongAnswers.add('No option available');
     }
 
-    wrongAnswers.shuffle();
-    _options = [
-      currentQuestion['synonym']!,
-      ...wrongAnswers.take(3),
-    ]..shuffle();
+    // Create options list with correct answer and wrong answers
+    _options = [currentQuestion['synonym']!, ...selectedWrongAnswers];
+    
+    // Shuffle multiple times for better randomization
+    for (int i = 0; i < 3; i++) {
+      _options.shuffle(Random());
+    }
   }
 
   void _checkAnswer(String selectedOption) {
@@ -118,14 +126,17 @@ class _SynonymsTypeState extends State<SynonymsType> {
         _questions.shuffle(Random());
       }
       _selectedAnswer = null;
-      _setOptions();
+      _setOptions(); // This will create and shuffle new options
     });
   }
 
   void _retryQuestion() {
     setState(() {
       _selectedAnswer = null;
-      _options.shuffle(Random());
+      // Shuffle multiple times for better randomization
+      for (int i = 0; i < 3; i++) {
+        _options.shuffle(Random());
+      }
     });
   }
 
@@ -160,7 +171,7 @@ class _SynonymsTypeState extends State<SynonymsType> {
             ),
           ),
           flexibleSpace: Container(
-            decoration: BoxDecoration(gradient: _appBarGradient),
+            decoration: const BoxDecoration(gradient: _appBarGradient),
           ),
         ),
         body: Center(
@@ -211,7 +222,7 @@ class _SynonymsTypeState extends State<SynonymsType> {
             ),
           ),
           flexibleSpace: Container(
-            decoration: BoxDecoration(gradient: _appBarGradient),
+            decoration: const BoxDecoration(gradient: _appBarGradient),
           ),
         ),
         body: Center(
@@ -285,7 +296,7 @@ class _SynonymsTypeState extends State<SynonymsType> {
           ),
         ),
         flexibleSpace: Container(
-          decoration: BoxDecoration(gradient: _appBarGradient),
+          decoration: const BoxDecoration(gradient: _appBarGradient),
         ),
         actions: [
           Container(

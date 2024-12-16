@@ -84,21 +84,24 @@ class _PhrasalVerbsPageState extends State<PhrasalVerbsPage> {
     }
 
     final currentQuestion = _questions[_currentQuestionIndex];
-    final wrongAnswers = _questions
+    final wrongAnswers = List<String>.from(_questions
         .where((q) => q['meaning'] != currentQuestion['meaning'])
-        .map((q) => q['meaning']!)
-        .toList();
+        .map((q) => q['meaning']!))
+      ..shuffle(Random());
 
     if (wrongAnswers.length < 3) {
       wrongAnswers
           .addAll(List.filled(3 - wrongAnswers.length, 'No option available'));
     }
 
-    wrongAnswers.shuffle();
     _options = [
       currentQuestion['meaning']!,
       ...wrongAnswers.take(3),
-    ]..shuffle();
+    ];
+    
+    for (var i = 0; i < 3; i++) {
+      _options.shuffle(Random());
+    }
   }
 
   void _checkAnswer(String selectedOption) {
@@ -122,7 +125,9 @@ class _PhrasalVerbsPageState extends State<PhrasalVerbsPage> {
   void _retryQuestion() {
     setState(() {
       _selectedAnswer = null;
-      _options.shuffle(Random());
+      for (var i = 0; i < 3; i++) {
+        _options.shuffle(Random());
+      }
     });
   }
 
@@ -149,7 +154,7 @@ class _PhrasalVerbsPageState extends State<PhrasalVerbsPage> {
           borderRadius: BorderRadius.vertical(bottom: Radius.circular(17)),
         ),
         flexibleSpace: Container(
-          decoration: BoxDecoration(gradient: _appBarGradient),
+          decoration: const BoxDecoration(gradient: _appBarGradient),
         ),
       ),
       body: SingleChildScrollView(
@@ -303,7 +308,7 @@ class _PhrasalVerbsPageState extends State<PhrasalVerbsPage> {
             ),
           ),
           flexibleSpace: Container(
-            decoration: BoxDecoration(gradient: _appBarGradient),
+            decoration: const BoxDecoration(gradient: _appBarGradient),
           ),
         ),
         body: Center(
@@ -358,7 +363,7 @@ class _PhrasalVerbsPageState extends State<PhrasalVerbsPage> {
             ),
           ),
           flexibleSpace: Container(
-            decoration: BoxDecoration(gradient: _appBarGradient),
+            decoration: const BoxDecoration(gradient: _appBarGradient),
           ),
         ),
         body: SafeArea(
@@ -436,7 +441,7 @@ class _PhrasalVerbsPageState extends State<PhrasalVerbsPage> {
           ),
         ),
         flexibleSpace: Container(
-          decoration: BoxDecoration(gradient: _appBarGradient),
+          decoration: const BoxDecoration(gradient: _appBarGradient),
         ),
         actions: [
           Container(

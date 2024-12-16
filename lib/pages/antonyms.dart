@@ -63,19 +63,20 @@ class AntonymsPageState extends State<AntonymsPage> {
 
   void _setOptions() {
     final currentQuestion = _questions[_currentQuestionIndex];
-    _options = [
-      currentQuestion['antonym']!,
-      ..._questions
-          .map((q) => q['antonym']!)
-          .where((option) => option != currentQuestion['antonym'])
-          .take(3)
-    ];
-
-    // Shuffle options only when retrying
-    if (_selectedAnswer != null &&
-        _selectedAnswer != currentQuestion['antonym']) {
-      _options.shuffle(Random());
-    }
+    final correctAnswer = currentQuestion['antonym']!;
+    
+    // Get wrong options (excluding the correct answer)
+    final wrongOptions = _questions
+        .where((q) => q['antonym'] != correctAnswer)
+        .map((q) => q['antonym']!)
+        .toList()
+        ..shuffle(); // Shuffle wrong options first
+    
+    // Take 3 wrong options
+    final selectedWrongOptions = wrongOptions.take(3).toList();
+    
+    // Combine with correct answer and shuffle
+    _options = [...selectedWrongOptions, correctAnswer]..shuffle();
   }
 
   void _checkAnswer(String selectedOption) {
@@ -129,7 +130,7 @@ class AntonymsPageState extends State<AntonymsPage> {
           borderRadius: BorderRadius.vertical(bottom: Radius.circular(17)),
         ),
         flexibleSpace: Container(
-          decoration: BoxDecoration(gradient: _appBarGradient),
+          decoration: const BoxDecoration(gradient: _appBarGradient),
         ),
       ),
       body: SingleChildScrollView(
@@ -281,7 +282,7 @@ class AntonymsPageState extends State<AntonymsPage> {
             ),
           ),
           flexibleSpace: Container(
-            decoration: BoxDecoration(gradient: _appBarGradient),
+            decoration: const BoxDecoration(gradient: _appBarGradient),
           ),
         ),
         body: Center(
@@ -336,7 +337,7 @@ class AntonymsPageState extends State<AntonymsPage> {
             ),
           ),
           flexibleSpace: Container(
-            decoration: BoxDecoration(gradient: _appBarGradient),
+            decoration: const BoxDecoration(gradient: _appBarGradient),
           ),
         ),
         body: Center(
@@ -410,7 +411,7 @@ class AntonymsPageState extends State<AntonymsPage> {
           ),
         ),
         flexibleSpace: Container(
-          decoration: BoxDecoration(gradient: _appBarGradient),
+          decoration: const BoxDecoration(gradient: _appBarGradient),
         ),
         actions: [
           Container(

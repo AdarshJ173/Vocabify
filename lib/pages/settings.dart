@@ -19,7 +19,7 @@ class SettingsPage extends StatefulWidget {
 
 class _SettingsPageState extends State<SettingsPage> {
   String _appVersion = '1.0.0';
-  int _currentIndex = 1; // Set to 1 for settings page
+  final int _currentIndex = 1; // Set to 1 for settings page
 
   @override
   void initState() {
@@ -89,7 +89,7 @@ class _SettingsPageState extends State<SettingsPage> {
             bottom: Radius.circular(17),
           ),
         ),
-        backgroundColor: Color(0xFF00ADB5),
+        backgroundColor: const Color(0xFF00ADB5),
       ),
       body: Container(
         decoration: BoxDecoration(
@@ -195,7 +195,7 @@ class _SettingsPageState extends State<SettingsPage> {
                             : const Color(0xFF424874).withOpacity(0.2),
                         borderRadius: BorderRadius.circular(12),
                       ),
-                      child: Icon(
+                      child: const Icon(
                         Icons.settings_rounded,
                         size: 28,
                       ),
