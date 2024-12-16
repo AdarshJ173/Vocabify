@@ -1,3 +1,3 @@
 # vocabify
 
-A new Flutter project.
+Vocabify is an innovative vocabulary-building app designed to enhance your language skills through engaging learning tools. Focused on idioms, phrasal verbs, synonyms, antonyms, and more, Vocabify makes studying interactive and effective with features like a spaced repetition system that optimizes your learning by reminding you to review words at strategic intervals. The app offers diverse content, allowing you to learn 20 new words daily, including idiomatic expressions and contextual usage. With a user-friendly interface, you can easily create and customize flashcards, study offline, and sync your progress across devices. Whether you're a beginner or looking to refine your vocabulary, Vocabify makes language learning enjoyable and accessible, helping you unlock the power of words and elevate your communication skills!
